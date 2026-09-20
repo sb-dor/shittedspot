@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shittedspot/providers.dart';
+import 'package:shittedspot/variants/variant_2/variant_2.dart';
 
 /// {@template products_widget}
 /// ProductsWidget widget.
@@ -21,14 +21,14 @@ class _ProductsWidgetState extends ConsumerState<ProductsWidget> {
   void initState() {
     super.initState();
     ref
-        .read(productsOfUserProvider(UserProductsRepository()).notifier)
-        .getProducts();
+        .read(productsOfUserProvider(userProviderRepo).notifier)
+        .getProducts('1');
   }
 
   // write
   @override
   Widget build(BuildContext context) {
-    final prUp = ref.watch(productsOfUserProvider(UserProductsRepository()));
+    final prUp = ref.watch(productsOfUserProvider(userProviderRepo));
     return Scaffold(
       body: ListView.builder(
         itemCount: prUp.length,

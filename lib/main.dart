@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shittedspot/products_widget.dart';
+
+import 'variants/variant_2/variant_2_widget.dart';
 
 void main() {
   runApp(const App());

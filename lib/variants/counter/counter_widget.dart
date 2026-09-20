@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shittedspot/providers.dart';
+import 'package:shittedspot/variants/counter/counter.dart';
 
 /// {@template counter}
 /// Counter widget.

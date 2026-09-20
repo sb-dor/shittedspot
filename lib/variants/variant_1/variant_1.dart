@@ -1,24 +1,12 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-part 'providers.g.dart';
-
-/// this part is good for now
-@riverpod
-class CounterProvider extends _$CounterProvider {
-  @override
-  int build() {
-    return 0;
-  }
-
-  void increment() => state++;
-}
-
 // shitted spot starts here
 //
 // Consider an example with two Riverpod providers: Users and Products.
 // Here, the Products provider relies on specific user data to load its products.
 // In such scenarios, Riverpod documentation typically advises directly observing the Users provider from within the Products provider:
+
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'variant_1.g.dart';
 
 /// I named it `userProvider` because the package itself generates the name `userProviderProvider`.
 @Riverpod(name: 'userProvider')
@@ -50,37 +38,3 @@ class ProductsProvider extends _$ProductsProvider {
     }
   }
 }
-
-abstract interface class IUserProducts {
-  Future<List<String>> getProducts();
-}
-
-class UserProductsRepository implements IUserProducts {
-  @override
-  Future<List<String>> getProducts() => Future.delayed(
-    const Duration(seconds: 1),
-    () => List.generate(5, (index) => "product ${index + 1}"),
-  );
-}
-
-class _ProductsOfUserController extends Notifier<List<String>> {
-  _ProductsOfUserController(this._repository);
-
-  final IUserProducts _repository;
-
-  @override
-  List<String> build() {
-    return <String>[];
-  }
-
-  Future<void> getProducts() async {
-    state = List.of(await _repository.getProducts());
-  }
-}
-
-final productsOfUserProvider =
-    NotifierProvider.family<
-      _ProductsOfUserController,
-      List<String>,
-      IUserProducts
-    >(_ProductsOfUserController.new);
