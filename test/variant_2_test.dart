@@ -12,6 +12,7 @@ import 'package:shittedspot/variants/variant_2/variant_2.dart';
 final class UserProductsMockImpl with Mock implements IUserProducts {}
 
 void main() {
+  const String userId = '1';
   late final IUserProducts userProducts;
   late ProviderContainer container;
 
@@ -29,14 +30,14 @@ void main() {
         ],
       );
 
-      when(() => userProducts.getProducts('1'))
+      when(() => userProducts.getProducts(userId))
           .thenAnswer((_) async => <String>[]);
 
       final notifier = container.read(
         productsOfUserProvider(userProducts).notifier,
       );
 
-      await notifier.getProducts('1');
+      await notifier.getProducts(userId);
 
       expect(notifier.state, isEmpty);
     });
@@ -50,14 +51,14 @@ void main() {
         ],
       );
 
-      when(() => userProducts.getProducts('1'))
+      when(() => userProducts.getProducts(userId))
           .thenAnswer((_) async => <String>['1', '2', '3']);
 
       final notifier = container.read(
         productsOfUserProvider(userProducts).notifier,
       );
 
-      await notifier.getProducts('1');
+      await notifier.getProducts(userId);
 
       expect(notifier.state, isNotEmpty);
     });
