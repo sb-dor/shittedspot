@@ -1,6 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// much more better, cause you are passing the repository impl you want
+///
+/// Take a look at the `_2_test.dart` file in the `tests` folder:
+/// Цriting tests for providers that depend on each other is much more difficult than the current, correct approach.
 final productsOfUserProvider = NotifierProvider.family
     .autoDispose<ProductsOfUserController, List<String>, IUserProducts>(
       ProductsOfUserController.new,
